@@ -25,15 +25,21 @@ jobs:
       with:
         username: ${{secrets.DOCKERHUB_USER}}
         password: ${{secrets.DOCKERHUB_PASS}}
-    - name: Construção da imagem Docker worker
-      uses: docker/build-push-action@v5.0.0
-      with: 
-        context: ./src
-        file: ./src/Dockerfile
-        push: true
-        tags: |
-          docker build -t ${{ secrets.DOCKER_REGISTRY }}/application-web:${{github.run_number}}
-          docker push ${{ secrets.DOCKER_REGISTRY }}/application-web:latest
+
+    - name: Construir e enviar imagem Docker
+      run: |
+        docker build -t ${{ secrets.DOCKER_REGISTRY }}/application-web:latest .
+        docker push ${{ secrets.DOCKER_REGISTRY }}/application-web:latest
+        
+    # - name: Construção da imagem Docker worker
+    #   uses: docker/build-push-action@v5.0.0
+    #   with: 
+    #     context: ./src
+    #     file: ./src/Dockerfile
+    #     push: true
+    #     tags: |
+    #       davicarneiro/application-web:${{github.run_number}}
+    #       davicarneiro/application-web:latest
           
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.16.1
