@@ -33,11 +33,7 @@ jobs:
         push: true
         tags: |
           davicarneiro/application-web:${{github.run_number}}
-          davicarneiro/application-web:latest
-    - name: Construir e enviar imagem Docker
-      run: |
-        docker build -t ${{ secrets.DOCKER_REGISTRY }}/application-web:latest .
-        docker push ${{ secrets.DOCKER_REGISTRY }}/application-web:latest
+          davicarneiro/application-web:latest  
           
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.16.1
@@ -72,7 +68,7 @@ jobs:
        run: |
           aws eks --region us-west-1 update-kubeconfig --name devops-eks
           kubectl apply -f ./k8s/deployment.yaml
-          kubectl apply -f ./k8s/service.yaml
+          kubectl apply -f ./k8s/.yaml
 
 
 
