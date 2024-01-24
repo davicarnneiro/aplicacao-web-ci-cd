@@ -31,3 +31,42 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: postgre
+spec:
+  selector:
+    matchLabels:
+      app: postgre
+  template:
+    metadata:
+      labels:
+        app: postgre
+    spec:
+      containers:
+        - name: postgre
+          image: postgres:13.1
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: _${{ secrets.POSTGRES_PASSWORD }}
+            - name: POSTGRES_USER
+              value: ${{ secrets.POSTGRES_USER }}
+            - name: POSTGRES_DB
+              value: ${{ secrets.POSTGRES_DB }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgre
+spec:
+  selector:
+    app: postgre
+  ports:
+    - port: 5432
+
