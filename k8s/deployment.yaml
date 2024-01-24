@@ -1,32 +1,5 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: postgre
-spec:
-  selector:
-    matchLabels:
-      app: postgre
-  template:
-    metadata:
-      labels:
-        app: postgre
-    spec:
-      containers:
-        - name: postgre
-          image: postgres:13.1
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_PASSWORD
-              value: _${{ secrets.POSTGRES_PASSWORD }}
-            - name: POSTGRES_USER
-              value: ${{ secrets.POSTGRES_USER }}
-            - name: POSTGRES_DB
-              value: ${{ secrets.POSTGRES_DB }}
-
----
-apiVersion: apps/v1
-kind: Deployment
 metadata:
   name: application-web
 spec:
@@ -46,6 +19,32 @@ spec:
     spec:
       containers:
         - name: application-web
-          image: davicarneiro/application-web:latest
+          image: davicarneiro/application-web:v1
           ports:
             - containerPort: 8080
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata: 
+#   name: postgre
+# spec:
+#   selector:
+#     matchLabels:
+#       app: postgre
+#   template:
+#     metadata:
+#       labels:
+#         app: postgre
+#     spec:
+#       containers:
+#         - name: postgre
+#           image: postgres:13.1
+#           ports:
+#             - containerPort: 5432
+#           env:
+#             - name: POSTGRES_PASSWORD
+#               value: _${{ secrets.POSTGRES_PASSWORD }}
+#             - name: POSTGRES_USER
+#               value: ${{ secrets.POSTGRES_USER }}
+#             - name: POSTGRES_DB
+#               value: ${{ secrets.POSTGRES_DB }}
