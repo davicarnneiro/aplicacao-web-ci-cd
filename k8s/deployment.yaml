@@ -46,6 +46,6 @@ spec:
     spec:
       containers:
         - name: application-web
-          image: davicarneiro/kube-news:latest
+          image: davicarneiro/kube-news:v1
           ports:
             - containerPort: 8080
