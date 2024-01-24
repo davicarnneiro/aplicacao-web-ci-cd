@@ -10,6 +10,7 @@ on:
 
 jobs:
   CI:
+    name: Build and Push image Dockerhub
     runs-on: ubuntu-latest
     permissions:
       contents: read
