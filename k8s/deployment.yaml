@@ -69,8 +69,3 @@ spec:
     app: postgre
   ports:
     - port: 5432
-
-networks:
-  kubenews_networks:
-    driver: bridge
-
