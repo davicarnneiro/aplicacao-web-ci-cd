@@ -32,9 +32,7 @@ jobs:
         file: ./src/Dockerfile
         push: true
         tags: |
-          # davicarneiro/application-web:${{github.run_number}}
-          # davicarneiro/application-web:latest
-          docker build -t ${{ secrets.DOCKER_REGISTRY }}/application-web:latest .
+          docker build -t ${{ secrets.DOCKER_REGISTRY }}/application-web:${{github.run_number}}
           docker push ${{ secrets.DOCKER_REGISTRY }}/application-web:latest
           
     - name: Run Trivy vulnerability scanner
