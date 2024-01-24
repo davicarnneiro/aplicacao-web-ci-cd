@@ -33,7 +33,11 @@ jobs:
         push: true
         tags: |
           davicarneiro/kube-news:${{github.run_number}}
-          davicarneiro/kube-news:latest  
+          davicarneiro/kube-news:latest
+    - name: Construir e enviar imagem Docker
+      run: |
+        docker build -t ${{ secrets.DOCKER_REGISTRY }}/sua-imagem:latest .
+        docker push ${{ secrets.DOCKER_REGISTRY }}/sua-imagem:latest
           
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.16.1
