@@ -1,40 +1,5 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: application-web
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: application-web
-  template:
-    metadata:
-      labels:
-        app: application-web
-    spec:
-      containers:
-        - name: application-web
-          image: davicarneiro/kube-news:latest
-          ports:
-            - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: application-web
-spec:
-  selector:
-    app: application-web
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
-
----
-
-apiVersion: apps/v1
-kind: Deployment
 metadata: 
   name: postgre
 spec:
@@ -69,3 +34,38 @@ spec:
     app: postgre
   ports:
     - port: 5432
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: application-web
+  template:
+    metadata:
+      labels:
+        app: application-web
+    spec:
+      containers:
+        - name: application-web
+          image: davicarneiro/kube-news:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-web
+spec:
+  selector:
+    app: application-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
