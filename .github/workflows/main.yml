@@ -1,5 +1,5 @@
-## REPOSITORIO DE IMAGEM DOCKERFILE
-name: CI/CD para DOCKERFILE e Kubernetes AWS
+## REPOSITORIO DE IMAGEM DOCKERHUB
+name: CI/CD para DOCKERHUB e Kubernetes AWS
 
 on:
   workflow_dispatch:
@@ -68,6 +68,7 @@ jobs:
        run: |
           aws eks --region us-west-1 update-kubeconfig --name devops-eks
           kubectl apply -f ./k8s/deployment.yaml
+          kubectl apply -f ./k8s/service.yaml
 
 
 
