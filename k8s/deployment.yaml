@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: application-web
-          image: davicarneiro/application-web:v8
+          image: davicarneiro/application-web:v1
           ports:
             - containerPort: 8080
 # ---
